@@ -87,8 +87,8 @@ main {
 }
 
 .weather-app-emoji {
-  font-size: 40px;
-  margin-top: 20px;
+  width: 100px;
+  height: 100px;
 }
 
 footer {
