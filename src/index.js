@@ -2,9 +2,41 @@ function updateWeather(response) {
   let temperatureElement = document.querySelector("#weather-app-temp");
   let temperature = response.data.temperature.current;
   let cityElement = document.querySelector("#weather-app-city");
+  let descriptionElement = document.querySelector("#weather-description");
+  let humidityElement = document.querySelector("#weather-humidity");
+  let windElement = document.querySelector("#weather-wind");
+  let timeElement = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
 
-  cityElement.innerHTML = response.data.city;
+  console.log(response.data);
+
   temperatureElement.innerHTML = Math.round(temperature);
+  cityElement.innerHTML = response.data.city;
+  descriptionElement.innerHTML = `forecast: ${response.data.condition.description}`;
+  humidityElement.innerHTML = `humidity: ${response.data.temperature.humidity}%`;
+  windElement.innerHTML = `wind: ${response.data.wind.speed} km/h`;
+  timeElement.innerHTML = `api last updated: ${formatDate(date)}`;
+}
+
+function formatDate(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()].toLowerCase();
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${day} ${hours}:${minutes}`;
 }
 
 function searchCity(city) {
